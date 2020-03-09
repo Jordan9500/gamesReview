@@ -11,7 +11,7 @@ class SignUpModel extends CI_Model{
         $username = $this->input->post('username');
         $password = $this->input->post('password'); 
         $sql = "insert into users (UserName, UserPassword)
-        values ($username, $password)";
+        values ('$username', '$password')";
         if ($this->db->query($sql) == 1)  {  
             return true;  
         } else {  
