@@ -5,6 +5,7 @@
                 <?php
                     $base = base_url();
                     $commentAdd = false;
+                    $username = $_COOKIE['active_user'];
                     foreach ($result as $row) {
                         // These classes onlywork if you attach Bootstrap.
                         echo <<<_END
@@ -28,33 +29,13 @@
                         _END;
                         if($row->GameComments_YN == 'Y') {
                             if($userExists) {
-                                echo <<<_END
-                                    <div class="card mb-2">
-                                        <h5 class="card-header">Add Comment</h5>
-                                        <div class="card-body">
-                                            <form method="post" action="$base/index.php/addComment/$row->GameName">
-                                                <div class="form-group">
-                                                    <input class="form-control" placeholder="Enter Comment" name='addedComment' type='text'>
-                                                </div>
-                                                <input class="btn btn-lg btn-success btn-block" type="submit" value="Add Comment" name="login_submit" >
-                                            </form>
-                                        </div>
+                                echo '<script>console.log('.json_encode($commentResult).')</script>';
+                                echo "
+                                    <div id='app'>
+                                        <comment-section :username='{$username}'>
+                                        </comment-section>
                                     </div>
-                                _END;
-                            }
-                            echo <<<_END
-                                <div class='card-footer w-100 text-muted'>
-                                    <h4>Comments: </h4>
-                            _END;
-                            foreach ($commentResult as $commentRow) {
-                                echo <<<_END
-                                    <div class="card mb-2">
-                                        <h5 class="card-header">$commentRow->UserName</h5>
-                                        <div class="card-body">
-                                            <p class="card-text">$commentRow->UserComment</p>
-                                        </div>
-                                    </div>
-                                _END;
+                                ";
                             }
                         }
                         else {
@@ -81,8 +62,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     
     <!-- Adding Vue -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="<?php echo base_url('scripts/Comment.js')?>"></script>
 
 
     <!-- Load in your custom scripts -->

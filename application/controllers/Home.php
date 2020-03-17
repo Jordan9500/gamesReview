@@ -73,7 +73,7 @@ class Home extends CI_Controller {
 
         $data['result'] = $this->HomeModel->getReview($slug);
         $data['commentResult'] = $this->HomeModel->getReviewComments($slug);
-
+    
         $this->load->view('templateHead', $data);    
         $this->load->view('review', $data);    
 
@@ -82,26 +82,8 @@ class Home extends CI_Controller {
     public function addComment($slug = NULL) {
         //Get the data from the model based on the slug we have.
         //Slugs match on to the knowledge around wildcard routes.
-        //More information on slugs can be found here: https://codeigniter.com/user_guide/tutorial/news_section.html
-
-        // Change this to whatever title you wish.
-        $data['title'] = 'Games Reviews';
-
-        // Condition checking if the user exists.
-        if (!($this->UserModel->checkCookie())) {
-            //The user doesn't exist so change your page accordigly.
-            $data['userExists'] = false;
-        }
-        else {
-            //The user does exist so change your page accordigly.
-            $data['userExists'] = true;    
-        }
         $slug = urldecode($slug);
         $this->HomeModel->AddComment($slug);
-
-        $comment = $this->input->post('addedComment'); 
-        redirect('http://localhost/gamesReview/index.php/review/'.$slug);  
-
     }
 
     //TODO: Create all other functions as required for further functionality (Comments, Login and so on.)
