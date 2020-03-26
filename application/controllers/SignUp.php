@@ -20,8 +20,6 @@ class SignUp extends CI_Controller {
     }
 
     public function index() {
-        // Change this to whatever title you wish.
-        $data['title'] = 'Games Reviews';
         $data['userExists'] = 'False';
     
         //Check if the cookie already exists
@@ -36,7 +34,9 @@ class SignUp extends CI_Controller {
     }
 
     public function SetUser() {
+        //Check if the username is existent in the database
         if($this->SQLModel->ifusername()) {
+            // If it isnt set the user 
             if($this->SignUpModel->setuser()) {
                 $data['username'] = $this->input->post('username');
                 $data['password'] = $this->input->post('password');
@@ -57,6 +57,7 @@ class SignUp extends CI_Controller {
             }
         }
         else {
+            // If it does exist inform the user that its invalid
             $data['userExists'] = 'True';
             //Load the view and send the data accross.
             $this->load->view('templateHead', $data);

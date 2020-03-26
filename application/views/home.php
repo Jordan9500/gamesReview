@@ -5,7 +5,7 @@
                 <?php
                     $base = base_url();
                     foreach ($result as $row) {
-                        // These classes onlywork if you attach Bootstrap.
+                        /* This outputs all the reviews in a card and sets up a button to drill into it */
                         echo <<<_END
                             <div class="card-group">
                                 <div class="card text-white bg-dark" style="width: 360px; margin: 5px;">
@@ -29,36 +29,101 @@
                     ?>
             </div>
         </div>
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary fixed-bottom" data-toggle="modal" data-target="#chatMenu">
-        Chat
-        </button>
+        <!-- This the chat section -->
+        <!-- Default dropup button -->
+        <div class="fixed-bottom">
+            <div class="btn-group dropup">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Chats
+                </button>
+                <div class="dropdown-menu">
+                    <!-- Dropdown menu links -->
+                    <!-- Open the chat -->
+                    <button type="button" id="generalChatButton" class="btn btn-primary" data-toggle="modal" data-target="#generalChatMenu">General Chat</button>
+                    <button type="button" id="gamingChatButton" class="btn btn-primary" data-toggle="modal" data-target="#gamingChatMenu">Gaming Chat</button>
+                    <button type="button" id="adviceChatButton" class="btn btn-primary" data-toggle="modal" data-target="#adviceChatMenu">Advice Chat</button>
 
-        <!-- Modal -->
-        <div class="modal fade" id="chatMenu" tabindex="-1" role="dialog" aria-labelledby="chatMenuTitle" aria-hidden="true">
+                </div>
+            </div>
+        </div>
+        <!-- Modal 1: General Chat -->
+        <div class="modal fade" id="generalChatMenu" tabindex="-1" role="dialog" aria-labelledby="chatMenuTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="chatMenuTitle">Chat</h5>
+                        <h5 class="modal-title" id="chatMenuTitle">General Chat</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <!-- Create an output for the chat service -->
-                        <div id = "chatspace">
+                        <div id = "generalChatspace">
                         
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <form>
-                            <input type="text" id="message" placeholder="Message" autocomplete="off" autofocus>
+                        <form id="generalForm">
+                            <input type="text" id="generalMessage" placeholder="Message" autocomplete="off" autofocus>
                             <button id="sendbutton" class="btn btn-secondary">Send</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Modal 2: Gaming Chat -->
+        <div class="modal fade" id="gamingChatMenu" tabindex="-1" role="dialog" aria-labelledby="chatMenuTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="chatMenuTitle">Gaming Chat</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Create an output for the chat service -->
+                        <div id = "gamingChatspace">
+                        
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <form id="gamingForm">
+                            <input type="text" id="gamingMessage" placeholder="Message" autocomplete="off" autofocus>
+                            <button id="sendbutton" class="btn btn-secondary">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal 3: Advice Chat -->
+        <div class="modal fade" id="adviceChatMenu" tabindex="-1" role="dialog" aria-labelledby="chatMenuTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="chatMenuTitle">Advice Chat</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Create an output for the chat service -->
+                        <div id = "adviceChatspace">
+                        
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <form id="adviceForm">
+                            <input type="text" id="adviceMessage" placeholder="Message" autocomplete="off" autofocus>
+                            <button id="sendbutton" class="btn btn-secondary">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         
     </body>
 

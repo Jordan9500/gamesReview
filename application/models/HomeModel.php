@@ -22,7 +22,7 @@ class HomeModel extends CI_Model{
         return $query->result();
     }
 
-    //Get the details for a game once it has been clicked on.
+    //Get the comments for a game once it has been clicked on.
     public function getReviewComments($slug = FALSE) {
         $query = $this->db->query("
             SELECT users.UserName, gamescomments.UserComment 
@@ -32,43 +32,10 @@ class HomeModel extends CI_Model{
             INNER JOIN users 
             ON UserID = users.UID 
             WHERE activereviews.GameName = '$slug'
+            ORDER BY gamescomments.UID Desc
         ");
         return $query->result();
     }
 
-    //Get the details for a game once it has been clicked on.
-    public function AddComment($slug = FALSE) {
-        $comment = $this->input->post('addedComment');
-        $query = $this->db->query("
-            SELECT ID 
-            FROM activereviews 
-            WHERE activereviews.GameName = '$slug'
-        ");
-        $data['ReviewID'] = $query->result();
 
-        $username = $_COOKIE['active_user'];
-        $query = $this->db->query("
-            SELECT UID 
-            FROM users 
-            WHERE UserName = '$username'
-        ");
-        $data['UserID'] = $query->result();
-
-        foreach ($data['ReviewID'] as $review) {
-            $ReviewID = $review->ID;
-        }
-
-        foreach ($data['UserID'] as $user) {
-            $UserID = $user->UID;
-        }
-
-        //Insert into the users table
-        $sql = "insert into gamescomments (UserID, ReviewID, UserComment)
-        values ('$UserID', '$ReviewID', '$comment')";
-        if ($this->db->query($sql) == 1)  {  
-            return true;  
-        } else {  
-            return false;  
-        }  
-    }
 }

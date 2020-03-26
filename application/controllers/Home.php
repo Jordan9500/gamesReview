@@ -41,6 +41,7 @@ class Home extends CI_Controller {
         //Load the view and send the data accross.
         $this->load->view('templateHead', $data);
         $this->load->view('home', $data);
+        $this->load->view('templateFooter', $data);
     }
 
     public function Logout() {
@@ -73,24 +74,11 @@ class Home extends CI_Controller {
 
         $data['result'] = $this->HomeModel->getReview($slug);
         $data['commentResult'] = $this->HomeModel->getReviewComments($slug);
-    
+
         $this->load->view('templateHead', $data);    
-        $this->load->view('review', $data);    
+        $this->load->view('review', $data);  
+        $this->load->view('templateFooter', $data);  
 
     }
-
-    public function addComment($slug = NULL) {
-        //Get the data from the model based on the slug we have.
-        //Slugs match on to the knowledge around wildcard routes.
-        $slug = urldecode($slug);
-        $this->HomeModel->AddComment($slug);
-    }
-
-    //TODO: Create all other functions as required for further functionality (Comments, Login and so on.)
-    // Note: You can redirect to a page by using the redirect function as follows:
-    /*
-        //Redirect Home
-        redirect('http://localhost/gamesReview');
-    */
   
 }

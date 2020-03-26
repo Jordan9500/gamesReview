@@ -4,10 +4,8 @@
             <div class="row">
                 <?php
                     $base = base_url();
-                    $commentAdd = false;
-                    $username = $_COOKIE['active_user'];
                     foreach ($result as $row) {
-                        // These classes onlywork if you attach Bootstrap.
+                        /* Outputs the review thats been drilled into */
                         echo <<<_END
                             <div class="card">
                                 <div class="row no-gutters">
@@ -27,16 +25,17 @@
                                     </div>
                                 </div>
                         _END;
+                        /* Does it accept commetns */
                         if($row->GameComments_YN == 'Y') {
-                            if($userExists) {
-                                echo '<script>console.log('.json_encode($commentResult).')</script>';
-                                echo "
-                                    <div id='app'>
-                                        <comment-section :username='{$username}'>
-                                        </comment-section>
-                                    </div>
-                                ";
-                            }
+                            /* If so show the comments already entered and the form to allow the user do it as well */
+                            $gameName = $row->GameName;
+                            $jsonComment = json_encode($commentResult);
+                            echo "<script> console.log($jsonComment) </script>";
+                            echo <<<_END
+                                <div id="comment-element">
+                                    <comment-section :comments='$jsonComment' slug='$gameName'></comment-section>
+                                </div>
+                            _END;
                         }
                         else {
                             echo "
@@ -51,8 +50,7 @@
                     }
                     ?>
             </div>
-        </div>
-        
+        </div>        
     </body>
 
 
@@ -62,8 +60,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     
     <!-- Adding Vue -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="<?php echo base_url('scripts/Comment.js')?>"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
+
+    <!-- Don't forget to load in Vue abd socket.io -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src=<?php echo base_url("scripts/comments.js"); ?>></script>
+
+    
 
 
     <!-- Load in your custom scripts -->

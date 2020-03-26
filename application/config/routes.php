@@ -54,7 +54,7 @@ $route['index'] = 'Home/index';
 /* Review Routes */
 $route['review/(:any)'] = 'Home/review/$1';
 $route['review'] = 'Home/review';
-$route['addComment/(:any)'] = 'Home/AddComment/$1';
+$route['addTheComment'] = 'AddComment';
 
 /* User Login Routes */
 $route['SignUp'] = 'SignUp';
@@ -62,7 +62,11 @@ $route['signup/setUser'] = 'SignUp/SetUser';
 $route['Login'] = 'Login';
 $route['login/getUser'] = 'Login/GetUser';
 $route['Logout'] = 'Home/Logout';
+/* Account management */
 $route['account'] = 'Account';
+$route['account/edit'] = 'Account/editUser';
+$route['account/update'] = 'Account/updateUser';
+
 $route['response'] = 'Home/Comments';
 $route['response-user'] = 'Home/UserName';
 $route['404_override'] = '';

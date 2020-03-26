@@ -19,12 +19,10 @@ class Login extends CI_Controller {
     }
 
     public function index() {
-        // Change this to whatever title you wish.
-        $data['title'] = 'Games Reviews';
         $data['failed'] = False;
         $data['userExists'] = False;
         if ($this->UserModel->checkCookie()) {
-            //Cookie detected. Delete the cookie.
+            //Cookie detected redirect them to the account page intead
             redirect('http://localhost/gamesReview/index.php/account');
         } 
         
@@ -34,6 +32,7 @@ class Login extends CI_Controller {
     }
 
     public function GetUser() {
+        //Get the user name 
         if($this->SQLModel->getuserbypost()) {
             $data['username'] = $this->input->post('username');
             $data['password'] = $this->input->post('password');
@@ -52,7 +51,9 @@ class Login extends CI_Controller {
             }           
         }
         else {
+            //The username doesnt exist
             $data['failed'] = True;
+            $data['userExists'] = False;
             //Load the view and send the data accross.
             $this->load->view('templateHead', $data);
             $this->load->view('login', $data);

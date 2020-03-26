@@ -4,7 +4,7 @@
             <div class="jumbotron my-auto">
                 <div class="display-5">
                     <h3>Login here:</h3>
-
+                    <!-- Sets up the login form -->
                     <form method="post" action="<?php echo base_url('index.php/login/getUser'); ?>">
                         <div class="form-group">
                             <input class="form-control" placeholder="Enter Username" name="username" type="username" autofocus>

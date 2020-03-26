@@ -5,6 +5,7 @@ class UserModel extends CI_Model{
         $this->load->database();
     }
 
+    //Check if the user cookie exists
     public function checkCookie() {
         //Check if the cookie already exists
         $is_user = get_cookie('active_user',TRUE);

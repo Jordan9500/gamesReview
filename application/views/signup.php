@@ -4,7 +4,7 @@
             <div class="jumbotron my-auto">
                 <div class="display-5">
                     <h3>Register here:</h3>
-
+                    <!-- Form for signing up the users -->
                     <form method="post" action="<?php echo base_url('index.php/signup/setUser'); ?>">
                         <div class="form-group">
                             <input class="form-control" placeholder="Enter Username" name="username" type="username" autofocus>
@@ -14,13 +14,14 @@
                         </div>
                         <div class="form-group">                        
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="darkmode">
+                                <input type="checkbox" class="form-check-input" id="darkmode" name="darkMode" value="Dark">
                                 <label class="form-check-label" for="darkmode">Dark Mode?</label>
                             </div>
                         </div>
 
                         <input class="btn btn-lg btn-success btn-block" type="submit" value="Register" name="register_submit" >
                         <?php
+                            /* If the username exists tell them its invalid */
                             if($userExists == "True") {
                                 echo "<h4 class='text-center'>Cannot Accept Username/Password</h4>";
                             } 
